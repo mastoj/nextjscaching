@@ -41,35 +41,24 @@ export async function generateStaticParams() {
 }
 
 export default async function Home() {
-  //  const data = await getProduct("1");
+  const data = await getProduct("1");
   // const data2 = await cachedGetProduct("2");
   // const data3 = await getProduct("1");
   // const data4 = await cachedGetProduct("2");
   return (
     <main className="flex min-h-screen flex-row flex-wrap items-center justify-between p-24">
       Stuff
+      <Data data={data} />
       {/* <Data {...data2} />
       <Data {...data3} />
       <Data {...data4} /> */}
     </main>
   );
 }
-function Data(data: {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: string[];
-}) {
+function Data({ data }: { data: string }) {
   return (
     <div className="outline outline-red-500 outline-2 z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-      <pre className="text-left">{JSON.stringify(data, null, 2)}</pre>
+      <pre className="text-left">{data}</pre>
     </div>
   );
 }
