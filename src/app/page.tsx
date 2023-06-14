@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cache } from "react";
 
-export const runtime = "edge";
+//export const runtime = "edge";
 export const revalidate = 60;
 
 const sampleData = {
@@ -27,12 +27,10 @@ const sampleData = {
 type Product = typeof sampleData;
 
 const getProduct = async (productId: string) => {
-  // Wait 5 seconds before returning the product
-  await new Promise((resolve) => setTimeout(resolve, 2000));
   console.log("Fetching product", productId);
-  const data = await fetch(`https://dummyjson.com/products/${productId}`).then(
-    (res) => res.json() as Promise<Product>
-  );
+  const data = await fetch(
+    `https://hub.dummyapis.com/delay?seconds=2&productId=${productId}`
+  ).then((res) => res.text());
   return data;
 };
 
