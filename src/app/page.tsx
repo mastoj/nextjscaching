@@ -31,7 +31,7 @@ const getProduct = async (productId: string) => {
   const data = await fetch(
     `https://hub.dummyapis.com/delay?seconds=2&productId=${productId}`
   ).then((res) => res.text());
-  return data;
+  return data + " " + Math.random();
 };
 
 const cachedGetProduct = cache(getProduct);
@@ -42,16 +42,16 @@ export async function generateStaticParams() {
 
 export default async function Home() {
   const data = await getProduct("1");
-  // const data2 = await cachedGetProduct("2");
-  // const data3 = await getProduct("1");
-  // const data4 = await cachedGetProduct("2");
+  const data2 = await cachedGetProduct("2");
+  const data3 = await getProduct("1");
+  const data4 = await cachedGetProduct("2");
   return (
     <main className="flex min-h-screen flex-row flex-wrap items-center justify-between p-24">
       Stuff
       <Data data={data} />
-      {/* <Data {...data2} />
-      <Data {...data3} />
-      <Data {...data4} /> */}
+      <Data data={data2} />
+      <Data data={data3} />
+      <Data data={data4} />
     </main>
   );
 }
