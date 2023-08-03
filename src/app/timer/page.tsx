@@ -9,7 +9,7 @@ export const revalidate = 10; // revalidate at most every hour
 const getTheTimeNoCache = async () => {
   const response = await fetch(
     "http://worldtimeapi.org/api/timezone/Europe/Oslo",
-    { cache: "no-cache" }
+    { next: { revalidate: 100 } }
   );
   console.log("Fetching time", response);
   return response.json();
